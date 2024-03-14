@@ -17,12 +17,11 @@ int generateRandomNumber() {
     return rand() % 100 + 1; // Generates a random number between 1 and 100
 }
 
-
-int main() { // this is a test
-
+int main() {
     srand(time(NULL)); // Seed the random number generator with current time
 
     priority_queue<int, vector<int>, greater<int>> pq; // Priority queue to store jobs
+    vector<int> stack; // Vector to store the last 10 elements
 
     // Generate initial set of random numbers and put them in the priority queue
     cout << "Initial numbers in the queue: ";
