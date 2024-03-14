@@ -13,6 +13,14 @@ using namespace std;
 //The program will generate a string of the priority queue followed preceded by the incoming item and followed by the highest priority item being popped
 
 
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
 int generateRandomNumber() {
     return rand() % 100 + 1; // Generates a random number between 1 and 100
 }
@@ -21,23 +29,31 @@ int main() {
     srand(time(NULL)); // Seed the random number generator with current time
 
     priority_queue<int, vector<int>, greater<int>> pq; // Priority queue to store jobs
-    vector<int> stack; // Vector to store the last 10 elements
+    vector<int> queue; // Vector to store the last 10 elements
 
     // Generate initial set of random numbers and put them in the priority queue
     cout << "Initial numbers in the queue: ";
     for (int i = 0; i < 10; ++i) {
         int num = generateRandomNumber();
         pq.push(num);
-        cout << num << " ";
+        queue.push_back(num);
+    }
+
+    // Print the initial numbers in the queue
+    for (auto it = queue.begin(); it != queue.end(); ++it) {
+        cout << *it << " ";
     }
     cout << endl;
 
     // Simulate dispatching and generating new numbers
-    for (int i = 0; i < 30; ++i) {
+    for (int i = 0; i < 10; ++i) {
         // Dispatch the highest priority job
         int currentDispatched = pq.top();
         pq.pop();
         cout << "The current dispatched number is " << currentDispatched << endl;
+
+        // Remove the dispatched number from the display queue
+        queue.erase(find(queue.begin(), queue.end(), currentDispatched));
 
         // Generate a new random number
         int newNumber = generateRandomNumber();
@@ -45,16 +61,21 @@ int main() {
 
         // Add the new number to the priority queue
         pq.push(newNumber);
+        queue.push_back(newNumber);
 
-        // Print the numbers in the queue
+        // If the stack exceeds 10 elements, remove the oldest element
+        if (queue.size() > 10) {
+            queue.erase(queue.begin());
+        }
+
+        // Print the numbers in the queue with the newest number on the right side
         cout << "The numbers in the queue are: ";
-        priority_queue<int, vector<int>, greater<int>> temp = pq; // Make a copy to print without modifying the original
-        while (!temp.empty()) {
-            cout << temp.top() << " ";
-            temp.pop();
+        for (int i = 0; i < 10;i++) {
+            cout << queue[i] << " ";
         }
         cout << endl;
     }
 
     return 0;
 }
+
