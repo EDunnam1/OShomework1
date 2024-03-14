@@ -18,5 +18,8 @@
     <ClCompile Include="assign1_dunnam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="assign2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
