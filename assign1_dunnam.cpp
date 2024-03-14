@@ -12,15 +12,6 @@ using namespace std;
 //As items are generated, the highest priority item in the list will be popped and printed out.
 //The program will generate a string of the priority queue followed preceded by the incoming item and followed by the highest priority item being popped
 
-
-#include <iostream>
-#include <queue>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-
-using namespace std;
-
 int generateRandomNumber() {
     return rand() % 100 + 1; // Generates a random number between 1 and 100
 }
