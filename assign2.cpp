@@ -2,13 +2,18 @@
 #include <queue>
 #include <cstdlib>
 #include <ctime>
+#include <stack>
 
 using namespace std;
 
 //STATEMENT OF PURPOSE
 //Authors: Evan Dunnam and Zach Monette
 //March. 26, 2024
-
+//The program creates processes with unique, incrementing IDs and assigns them a random number that serves as the 
+//priority and time needed in the CPU.
+//A ready queue handles 5 processes in a roud-robbin fashion with a 2 unit slice time.
+// If a program needs more time, it will be put back in the ready queue. Otherwise it will terminate and leave the system.
+// (If a program has an execution time of 3, it will complete 2 units of time before it is moved to the back, where its number will change to 1.
 int generateRandomNumber() {
     return rand() % 20 + 1; // Generates a random number between 1 and 20
 }
@@ -18,6 +23,7 @@ int main() {
 
     priority_queue<int, vector<int>, greater<int>> pq; // Priority queue to store jobs
     vector<int> queue; // Vector to store the last 10 elements
+    stack<int> readyQueue; //Ready queue for programs to be processed
 
     // Generate initial set of random numbers and put them in the priority queue
     cout << "Initial numbers in the queue: ";
