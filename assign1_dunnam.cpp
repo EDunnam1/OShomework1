@@ -18,7 +18,7 @@ int generateRandomNumber() {
 }
 
 
-int main() {
+int main() { //this is a test
 
     srand(time(NULL)); // Seed the random number generator with current time
 
